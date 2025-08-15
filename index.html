@@ -3,48 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MercadoPereira's - Mercado Online</title>
+    <title>MercadoPereira's</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
-    <div class="logo-container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Shopping_cart_icon.svg/1024px-Shopping_cart_icon.svg.png" alt="Logo" class="logo">
-        <h1>MercadoPereira's</h1>
-    </div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/PSE_logo.png" alt="Logo PSE" class="logo">
+    <h1>MercadoPereira's</h1>
 </header>
 
-<main>
-    <section id="products" class="products"></section>
+<!-- NUEVO: Filtros por Categoría -->
+<section class="category-filter">
+    <button class="category-btn" data-category="all">Todos</button>
+    <button class="category-btn" data-category="frutas">Frutas</button>
+    <button class="category-btn" data-category="verduras">Verduras</button>
+    <button class="category-btn" data-category="cereales">Cereales</button>
+    <button class="category-btn" data-category="tuberculos">Tubérculos</button>
+    <button class="category-btn" data-category="proteinas">Proteínas</button>
+    <button class="category-btn" data-category="lacteos">Lácteos</button>
+</section>
 
-    <aside class="cart">
-        <h2>🛍️ Carrito de Compras</h2>
-        <ul id="cart-items"></ul>
-        <p><strong>Total:</strong> <span id="total">0</span> COP</p>
-        <button id="pse-button" class="pse-btn">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/PSE_logo.svg/2560px-PSE_logo.svg.png" alt="PSE" class="pse-logo">
-            Pagar con PSE
-        </button>
-    </aside>
-</main>
+<section id="product-list" class="products"></section>
 
-<!-- Modal PSE -->
+<section id="cart" class="cart">
+    <h2>Carrito</h2>
+    <ul id="cart-items"></ul>
+    <p>Total: <span id="cart-total">0</span> COP</p>
+    <button id="pse-button">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/PSE_logo.png" alt="Logo PSE">
+        Pagar con PSE
+    </button>
+</section>
+
 <div id="pse-modal" class="modal">
     <div class="modal-content">
-        <span class="close-button">&times;</span>
-        <h2>PSE - Pago Seguro en Línea</h2>
-        <p>Total a pagar: <strong><span id="modal-total">0</span> COP</strong></p>
-        <label>Banco:
-            <select>
-                <option>Bancolombia</option>
-                <option>Davivienda</option>
-                <option>Banco de Bogotá</option>
-                <option>Nequi</option>
-                <option>BBVA</option>
-            </select>
-        </label>
-        <button id="confirm-payment" class="confirm-btn">✅ Confirmar Pago</button>
+        <span id="close-modal" class="close">&times;</span>
+        <h2>Pago PSE</h2>
+        <p>Valor a pagar: <span id="modal-total"></span> COP</p>
+        <button id="confirm-payment">Confirmar pago</button>
     </div>
 </div>
 

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MercadoPereira's - Mercado Online</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div class="logo-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Shopping_cart_icon.svg/1024px-Shopping_cart_icon.svg.png" alt="Logo" class="logo">
+        <h1>MercadoPereira's</h1>
+    </div>
+</header>
+
+<main>
+    <section id="products" class="products"></section>
+
+    <aside class="cart">
+        <h2>🛍️ Carrito de Compras</h2>
+        <ul id="cart-items"></ul>
+        <p><strong>Total:</strong> <span id="total">0</span> COP</p>
+        <button id="pse-button" class="pse-btn">💳 Pagar con PSE</button>
+    </aside>
+</main>
+
+<!-- Modal PSE -->
+<div id="pse-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>PSE - Pago Seguro en Línea</h2>
+        <p>Total a pagar: <strong><span id="modal-total">0</span> COP</strong></p>
+        <label>Banco:
+            <select>
+                <option>Bancolombia</option>
+                <option>Davivienda</option>
+                <option>Banco de Bogotá</option>
+                <option>Nequi</option>
+                <option>BBVA</option>
+            </select>
+        </label>
+        <button id="confirm-payment" class="confirm-btn">✅ Confirmar Pago</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

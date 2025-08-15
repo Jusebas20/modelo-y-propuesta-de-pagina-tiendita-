@@ -1,205 +1,110 @@
-/* ==== ESTILO GENERAL ==== */
-body {
-    font-family: 'Segoe UI', sans-serif;
-    margin: 0;
-    background: linear-gradient(135deg, #f4f4f4, #e0e0e0);
-    color: #333;
+// Lista de productos actualizada
+const products = [
+    { id: 1, name: "Banano", price: 2500, image: "https://images.unsplash.com/photo-1615484477905-4c3a4551d26c" },
+    { id: 2, name: "Tomate", price: 4000, image: "https://images.unsplash.com/photo-1582515073490-dc0c4a30c0a6" },
+    { id: 3, name: "Arroz (1kg)", price: 5200, image: "https://images.unsplash.com/photo-1606787366850-de6330128bfc" },
+    { id: 4, name: "Leche (1L)", price: 4200, image: "https://images.unsplash.com/photo-1580910051074-7cdd31b9f54e" },
+    { id: 5, name: "Pan Tajado", price: 4800, image: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a" },
+    { id: 6, name: "Cereal", price: 9500, image: "https://images.unsplash.com/photo-1604908177079-6b4d7d479708" },
+    { id: 7, name: "Yogurt", price: 6500, image: "https://images.unsplash.com/photo-1580910051074-7cdd31b9f54e" }
+];
+
+let cart = [];
+
+// Renderizar productos
+const productsContainer = document.getElementById("products");
+products.forEach(product => {
+    const div = document.createElement("div");
+    div.classList.add("product");
+    div.innerHTML = `
+        <img src="${product.image}?auto=format&fit=crop&w=400&q=80" alt="${product.name}">
+        <h3>${product.name}</h3>
+        <p>${product.price.toLocaleString()} COP</p>
+        <button onclick="addToCart(${product.id})">Agregar al carrito</button>
+    `;
+    productsContainer.appendChild(div);
+});
+
+// Agregar producto
+function addToCart(id) {
+    const product = products.find(p => p.id === id);
+    const existing = cart.find(item => item.id === id);
+
+    if (existing) {
+        existing.quantity++;
+    } else {
+        cart.push({ ...product, quantity: 1 });
+    }
+    updateCart();
 }
 
-/* ==== ENCABEZADO ==== */
-header {
-    background: #0d1b2a;
-    color: white;
-    padding: 15px 20px;
-    box-shadow: 0px 2px 10px rgba(0,0,0,0.3);
+// Cambiar cantidad
+function changeQuantity(id, amount) {
+    const item = cart.find(p => p.id === id);
+    if (item) {
+        item.quantity += amount;
+        if (item.quantity <= 0) {
+            cart = cart.filter(p => p.id !== id);
+        }
+    }
+    updateCart();
 }
 
-.logo-container {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+// Eliminar producto
+function removeFromCart(id) {
+    cart = cart.filter(item => item.id !== id);
+    updateCart();
 }
 
-.logo {
-    width: 50px;
-    height: 50px;
+// Actualizar carrito
+function updateCart() {
+    const cartItems = document.getElementById("cart-items");
+    cartItems.innerHTML = "";
+    let total = 0;
+
+    cart.forEach(item => {
+        total += item.price * item.quantity;
+        const li = document.createElement("li");
+        li.innerHTML = `
+            ${item.name} - ${item.price.toLocaleString()} COP x ${item.quantity}
+            <button class="quantity-btn" onclick="changeQuantity(${item.id}, -1)">-</button>
+            <button class="quantity-btn" onclick="changeQuantity(${item.id}, 1)">+</button>
+            <button class="remove-btn" onclick="removeFromCart(${item.id})">❌</button>
+        `;
+        cartItems.appendChild(li);
+    });
+
+    document.getElementById("total").textContent = total.toLocaleString();
 }
 
-header h1 {
-    margin: 0;
-    font-size: 1.8rem;
-    color: #f4d35e;
-}
+// Modal PSE
+const pseButton = document.getElementById("pse-button");
+const modal = document.getElementById("pse-modal");
+const closeModal = document.querySelector(".close-button");
+const confirmPayment = document.getElementById("confirm-payment");
 
-/* ==== DISEÑO PRINCIPAL ==== */
-main {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 20px;
-    gap: 20px;
-}
+pseButton.addEventListener("click", () => {
+    if (cart.length === 0) {
+        alert("Tu carrito está vacío");
+        return;
+    }
+    document.getElementById("modal-total").textContent = document.getElementById("total").textContent;
+    modal.style.display = "block";
+});
 
-/* ==== PRODUCTOS ==== */
-.products {
-    flex: 3;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-}
+closeModal.addEventListener("click", () => {
+    modal.style.display = "none";
+});
 
-.product {
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
-    transition: transform 0.2s ease;
-}
+confirmPayment.addEventListener("click", () => {
+    alert("Pago simulado con PSE. ¡Gracias por tu compra en MercadoPereira's! 🛒");
+    cart = [];
+    updateCart();
+    modal.style.display = "none";
+});
 
-.product:hover {
-    transform: translateY(-5px);
-}
-
-.product img {
-    max-width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-.product h3 {
-    margin: 10px 0;
-    font-size: 1.1rem;
-}
-
-.product p {
-    font-weight: bold;
-    color: #f4d35e;
-}
-
-.product button {
-    background: #1b263b;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 5px;
-}
-
-.product button:hover {
-    background: #415a77;
-}
-
-/* ==== CARRITO ==== */
-.cart {
-    flex: 1;
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
-}
-
-.cart ul {
-    list-style: none;
-    padding: 0;
-}
-
-.cart li {
-    margin: 5px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #f8f8f8;
-    padding: 5px;
-    border-radius: 5px;
-}
-
-.quantity-btn {
-    padding: 3px 7px;
-    margin: 0 3px;
-    background: #415a77;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.quantity-btn:hover {
-    background: #778da9;
-}
-
-.remove-btn {
-    background: red;
-    color: white;
-    border: none;
-    padding: 3px 6px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-/* ==== BOTÓN PSE ==== */
-.pse-btn {
-    background: #005baa;
-    color: white;
-    border: none;
-    padding: 10px;
-    width: 100%;
-    margin-top: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-.pse-btn:hover {
-    background: #003f73;
-}
-
-.pse-logo {
-    width: 40px;
-    height: auto;
-}
-
-/* ==== MODAL ==== */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 9999;
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-.modal-content {
-    background: #fff;
-    margin: 10% auto;
-    padding: 20px;
-    border-radius: 12px;
-    width: 320px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-}
-
-.close-button {
-    float: right;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-.confirm-btn {
-    background: #f4d35e;
-    color: #0d1b2a;
-    padding: 8px 12px;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 10px;
-    border-radius: 5px;
-}
-
-.confirm-btn:hover {
-    background: #e4c050;
-}
+window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+        modal.style.display = "none";
+    }
+});

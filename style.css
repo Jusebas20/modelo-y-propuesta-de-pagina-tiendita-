@@ -2,16 +2,16 @@
 body {
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
-    background: linear-gradient(135deg, #f9f9f9, #ececec);
+    background: linear-gradient(135deg, #f4f4f4, #e0e0e0);
     color: #333;
 }
 
 /* ==== ENCABEZADO ==== */
 header {
-    background: #27ae60;
+    background: #0d1b2a;
     color: white;
     padding: 15px 20px;
-    box-shadow: 0px 2px 10px rgba(0,0,0,0.2);
+    box-shadow: 0px 2px 10px rgba(0,0,0,0.3);
 }
 
 .logo-container {
@@ -28,6 +28,7 @@ header {
 header h1 {
     margin: 0;
     font-size: 1.8rem;
+    color: #f4d35e;
 }
 
 /* ==== DISEÑO PRINCIPAL ==== */
@@ -51,7 +52,7 @@ main {
     padding: 15px;
     border-radius: 10px;
     text-align: center;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
     transition: transform 0.2s ease;
 }
 
@@ -73,11 +74,11 @@ main {
 
 .product p {
     font-weight: bold;
-    color: #27ae60;
+    color: #f4d35e;
 }
 
 .product button {
-    background: #27ae60;
+    background: #1b263b;
     color: white;
     border: none;
     padding: 8px 12px;
@@ -87,7 +88,7 @@ main {
 }
 
 .product button:hover {
-    background: #219150;
+    background: #415a77;
 }
 
 /* ==== CARRITO ==== */
@@ -96,7 +97,7 @@ main {
     background: white;
     padding: 15px;
     border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
 }
 
 .cart ul {
@@ -117,7 +118,7 @@ main {
 .quantity-btn {
     padding: 3px 7px;
     margin: 0 3px;
-    background: #3498db;
+    background: #415a77;
     color: white;
     border: none;
     border-radius: 4px;
@@ -125,7 +126,7 @@ main {
 }
 
 .quantity-btn:hover {
-    background: #2980b9;
+    background: #778da9;
 }
 
 .remove-btn {
@@ -148,10 +149,19 @@ main {
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
 .pse-btn:hover {
-    background: #004080;
+    background: #003f73;
+}
+
+.pse-logo {
+    width: 40px;
+    height: auto;
 }
 
 /* ==== MODAL ==== */
@@ -180,8 +190,8 @@ main {
 }
 
 .confirm-btn {
-    background: #27ae60;
-    color: white;
+    background: #f4d35e;
+    color: #0d1b2a;
     padding: 8px 12px;
     border: none;
     cursor: pointer;
@@ -191,5 +201,5 @@ main {
 }
 
 .confirm-btn:hover {
-    background: #219150;
+    background: #e4c050;
 }

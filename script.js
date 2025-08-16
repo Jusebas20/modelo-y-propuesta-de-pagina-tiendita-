@@ -4,7 +4,7 @@ const products = [
     { name: "Cereal", price: 8000, image: "https://upload.wikimedia.org/wikipedia/commons/8/86/Cornflakes_bowl.jpg", category: "cereales" },
     { name: "Papa", price: 3000, image: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Potatoes.jpg", category: "tuberculos" },
     { name: "Pollo", price: 12000, image: "https://upload.wikimedia.org/wikipedia/commons/6/60/Chicken_meat.jpg", category: "proteinas" },
-    { name: "Yogurt", price: 3500, image: "https://upload.wikimedia.org/wikipedia/commons/1/1d/Yogurt_plain.jpg", category: "lacteos" },
+    { name: "Yogurt", price: 3500, image: "https://tse2.mm.bing.net/th/id/OIP.YXYBRsigmhxgp9_RUJ0zvQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3", category: "lacteos" },
     { name: "Fresa", price: 1200, image: "https://es.dreamstime.com/fondo-real-de-fresas-fresa-alimentario-image268431953, category: "frutas"}
 ];
 
